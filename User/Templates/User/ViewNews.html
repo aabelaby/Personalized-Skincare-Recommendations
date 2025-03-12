@@ -1,0 +1,138 @@
+{% extends 'User/Head.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', Arial, sans-serif;
+        }
+
+        body {
+            background: #ffffff;
+            min-height: 100vh;
+        }
+
+        /* Top Bar */
+        .topbar {
+            width: 100%;
+            background: #f4e1c1;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .topbar-left a {
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: absolute;
+            left: 20px;
+        }
+
+        .topbar-left a:hover {
+            color: #966d51;
+        }
+
+        .topbar-center img {
+            height: 40px;
+        }
+
+        /* Heading */
+        .news-heading {
+            font-size: 24px;
+            font-weight: 600;
+            color: #966d51;
+            margin: 20px 0;
+        }
+
+        /* News Table */
+        .news-table {
+            width: 90%;
+            max-width: 1200px;
+            margin: 30px 0;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .news-table th, .news-table td {
+            padding: 20px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .news-table th {
+            background: #966d51;
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .news-table tr:hover {
+            background: #f9f5f5;
+        }
+
+        .news-table td {
+            color: #555;
+            font-size: 14px;
+        }
+
+        .news-table img {
+            width: 250px;
+            height: auto;
+            border-radius: 10px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .news-table img:hover {
+            transform: scale(1.05);
+        }
+        .cont{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="cont">
+        <!-- Heading -->
+    <h2 class="news-heading">Latest News</h2>
+
+    <!-- News Table -->
+    <form enctype="multipart/form-data">
+        <table class="news-table">
+            <tr>
+                <th>SL NO</th>
+                <th>Content</th>
+                <th>Photo</th>
+            </tr>
+            {% for i in new %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.news_content }}</td>
+                <td><img src="{{ i.news_photo.url }}" width="250px" alt=""></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+    </div>
+</body>
+</html>
+{% endblock content %}

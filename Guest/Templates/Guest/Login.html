@@ -1,0 +1,97 @@
+{% extends 'Guest/Head.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', Arial, sans-serif;
+        }
+
+        body {
+            background: #f4e1c1;
+            height: 100vh;
+        }
+
+        .login-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            width: 100%;
+            max-width: 350px;
+        }
+
+        h2 {
+            color: #7a4d39;
+            margin-bottom: 15px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #7a4d39;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #7a4d39;
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: #5a3223;
+        }
+
+        @media (max-width: 600px) {
+            .login-container {
+                width: 90%;
+            }
+        }
+        .cont{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="cont">
+        <div class="login-container">
+            <h2>Login</h2>
+            <form action="" method="post">
+                {% csrf_token %}
+                <input type="text" name="email" placeholder="Enter Email" required>
+                <input type="password" name="password" placeholder="Enter Password" 
+                     
+                    title="Must contain at least one number, one uppercase and lowercase letter, and at least 8 or more characters" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+    {%if msg%}
+    <script>
+        alert('{{msg}}');
+        window.location="{% url 'Guest:Login' %}"
+    </script>
+    {%endif%}
+</body>
+</html>
+{% endblock content %}

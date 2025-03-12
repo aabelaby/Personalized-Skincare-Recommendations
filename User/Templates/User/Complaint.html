@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>User Complaint</title>
+</head>
+<body>
+
+   
+    <form action="" method="post">
+        {% csrf_token %}
+        <table border="1" >
+            <tr>
+                <td><label>Title:</label></td>
+                <td><input type="text" name="title" required value="{{type.title}}"></td>
+            </tr>
+            <tr>
+                <td><label>Content:</label></td>
+                <td><textarea name="content" rows="4" cols="30" required value="{{type.content}}"></textarea></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <button type="submit"  >Submit</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <br>
+    <table border="1">
+        <tr>
+            <td>SL NO</td>
+            <td>Title</td>
+            <td>Content</td>
+            <td>Reply</td>
+        </tr>
+        {%for i in comp%}
+        <tr>
+            <td>{{i.id}}</td>
+            <td>{{i.title}}</td>
+            <td>{{i.content}}</td>
+            <td>{{i.reply}}</td>
+        </tr>
+        {%endfor%}
+    </table>
+
+</body>
+</html>

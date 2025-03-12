@@ -1,0 +1,34 @@
+{% extends 'Admin/Head.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Complaints</title>
+</head>
+<body>
+    <div class="bg-light rounded h-100 p-4">
+        <h2 align="center">View Complaints</h2>
+        <table class="table">
+            <tr>
+                <th>SL NO</th>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Reply</th>
+                <th>Action</th>
+            </tr>
+            {% for i in comp %}
+            <tr>
+                <td>{{ i.id }}</td>
+                <td>{{ i.title }}</td>
+                <td>{{ i.content }}</td>
+                <td>{{ i.reply }}</td>
+                <td><a href="{% url 'Admin:Reply' i.id %}" class="btn btn-primary m-2">Reply</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>
+{% endblock content %}

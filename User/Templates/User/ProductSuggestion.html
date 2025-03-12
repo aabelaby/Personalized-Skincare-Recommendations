@@ -1,0 +1,524 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #d6bab1;
+            /* display: flex; */
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+        }
+        .concerncard{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            display: flex;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card img {
+            width: 150px;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .card-text {
+            font-size: 14px;
+            color: #555;
+        }
+
+        @media (max-width: 600px) {
+            .card {
+                flex-direction: column;
+            }
+
+            .card img {
+                width: 100%;
+                height: 150px;
+            }
+        }
+        tr, td {
+            padding: 10px;
+        }
+
+
+        .product-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    justify-content: center;
+
+    }
+
+    .product-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    }
+
+    .product-card:hover {
+    transform: translateY(-5px);
+    }
+
+    .product-image {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    }
+
+    .product-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    }
+
+    .product-content {
+    padding: 15px;
+    }
+
+    .product-title {
+    margin: 0 0 10px;
+    font-size: 1.2em;
+    color: #333;
+    }
+
+    .product-details {
+    font-size: 0.9em;
+    color: #666;
+    margin: 0 0 10px;
+    height: 60px;
+    overflow: hidden;
+    }
+
+    .product-price {
+    font-size: 1.1em;
+    color: #2c7;
+    margin: 0 0 15px;
+    font-weight: bold;
+    }
+
+    .product-links {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    }
+
+    .btn {
+    padding: 8px 15px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+    }
+
+    .amazon-btn {
+    background-color: #ff9900;
+    color: white;
+    }
+
+    .amazon-btn:hover {
+    background-color: #e68a00;
+    }
+
+    .flipkart-btn {
+    background-color: #2874f0;  
+    color: white;
+    }
+
+    .flipkart-btn:hover {
+    background-color: #1a5dc7;
+    }
+
+    .product-id {
+    font-size: 0.8em;
+    color: #999;
+    margin: 0;
+    }
+
+/* Responsive adjustments */
+    @media (max-width: 768px) {
+    .product-container {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .product-image {
+    height: 200px;
+    }
+    }
+    .maincont{
+    display: flex;
+    flex-direction: column;
+    }
+
+    .carousel {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    }
+
+    .carousel-inner {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease;
+    }
+
+    .carousel-item {
+    min-width: 100%;
+    height: 100%;
+    }
+
+    .carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    }
+
+    .carousel-prev,
+    .carousel-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    z-index: 10;
+    }
+
+    .carousel-prev {
+    left: 10px;
+    }
+
+    .carousel-next {
+    right: 10px;
+    }
+
+    .carousel-prev:hover,
+    .carousel-next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+    }
+    .tablecon{
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    }
+
+    .disclaimer {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    max-width: 800px;
+    margin: 20px auto;
+    font-size: 14px;
+    color: #666;
+    }
+
+    .disclaimer h3 {
+    color: #333;
+    margin-bottom: 10px;
+    }
+
+    .disclaimer ol {
+    margin-left: 20px;
+    }
+
+    .disclaimer ul {
+    margin-left: 40px;
+    }
+
+    .imgcontent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 200px;
+    }
+
+    table {
+        background-color: white;
+    }
+
+    .home-container {
+        display:flex;
+        justify-content: flex-end;
+        padding: 10px;
+    }
+
+    .home-button {
+    background-color: #a47856; 
+    color: white;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px; 
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); 
+    display: inline-block;
+    text-decoration: none;
+}
+
+.home-button:hover {
+    background-color: #8c5e3c; 
+    transform: scale(1.05); 
+}
+    </style>
+</head>
+
+<body align="center">
+    <div class="home-container">
+        <a href="{% url 'User:HomePage' %}" class="home-button">Back to Home</a>
+    </div>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="tablecon">
+            <table border="1" align="center" class="tablecon">
+                <tr>
+                    <td>Enter your Skin Type</td>
+                    <td>
+                        <select name="skintype" required id="selskintype" onchange="searchPDT()">
+                            <option value="">--Select your skin type--</option>
+                            {% for i in skintype %}
+                            <option value="{{i.id}}">{{i.skin_type}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="imgcontent">
+            <img src="{% static 'Images/skintype.jpg' %}" width="380" height="380" alt="">
+        <div class="disclaimer">
+            <h3>Disclaimer: How to Determine Your Skin Type</h3>
+            <p>The following steps are provided as a general guide to help you identify your skin type. This is not a substitute for professional dermatological advice. Results may vary, and we recommend consulting a skincare professional for an accurate assessment.</p>
+            <ol>
+                <li><strong>Clean Your Face</strong>: Wash your face with a gentle cleanser and lukewarm water. Pat dry with a clean towel. Avoid harsh scrubbing or hot water, as this may affect the outcome.</li>
+                <li><strong>Wait 1 Hour</strong>: Allow your skin to rest for one hour without applying any products or touching your face. This helps your skin return to its natural state.</li>
+                <li><strong>Check for Oil</strong>: After one hour, observe your face in a mirror or gently press a tissue against your skin. Note areas that appear oily, shiny, or dry.</li>
+                <li><strong>Identify Your Skin Type</strong>:
+                    <ul>
+                        <li><strong>Dry</strong>: Skin feels tight, flaky, or rough with no visible oil.</li>
+                        <li><strong>Combination</strong>: Oily on the forehead, nose, and chin (T-zone), but dry or normal on the cheeks.</li>
+                        <li><strong>Oily</strong>: Skin appears shiny or greasy across most areas.</li>
+                    </ul>
+                </li>
+                <li><strong>Visual Reference</strong>: Refer to the accompanying image to help match your observations to a skin type. For best results, repeat this process over a few days if you’re uncertain.</li>
+            </ol>
+            <p><strong>Note</strong>: Skin type can change due to factors like weather, hormones, or product use. This method is a starting point and may not fully capture your skin’s needs. Proceed at your own discretion. Ready to explore your skincare options?</p>
+        </div>
+        </div>
+        <div class="tablecon">
+            <table border="1" align="center">
+                <tr>
+                    <td>Select your Skin Concern</td>
+                    <td>
+                        <select name="concern" id="concern" required onchange="searchPDT()">
+                            <option value="">--Select your skin concern--</option>
+                            {% for i in skinconcern %}
+                            <option value="{{i.id}}">{{i.concern_name}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="concerncard">
+            <div class="card-container">
+                {% for i in skinconcern %}
+                <div class="card">
+                    <img src="{{i.concern_photo.url}}" width="150px" alt="Image">
+                    <div class="card-content">
+                        <div class="card-title">{{i.concern_name}}</div>
+                        <div class="card-text">{{i.concern_details}}</div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <br>
+        <div class="maincont" id="result">
+            
+        </div>
+    </form>
+</body>
+
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    function searchPDT() {
+        var skinid = document.getElementById("selskintype").value;
+        var concernid = document.getElementById("concern").value;
+        var ur = "{% url 'User:ajaxsearchproduct' %}"
+        $.ajax({
+            url: ur,
+            data: { skinid: skinid,concernid: concernid },
+            success: function (data) {
+                $("#result").html(data);
+            },
+        });
+    }
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    // Function to initialize carousels
+    function initializeCarousels() {
+        $('.carousel').each(function() {
+            const $carousel = $(this);
+            const $inner = $carousel.find('.carousel-inner');
+            const $items = $carousel.find('.carousel-item');
+            const itemCount = $items.length;
+            let currentIndex = 0;
+            let intervalId = null;
+            const slideInterval = 3000; // Slide every 3 seconds
+
+            // Log for debugging
+            console.log('Initializing carousel with', itemCount, 'items');
+
+            // Hide arrows if there's only one image
+            if (itemCount <= 1) {
+                $carousel.find('.carousel-prev, .carousel-next').hide();
+                return;
+            } else {
+                $carousel.find('.carousel-prev, .carousel-next').show();
+            }
+
+            // Function to move to a specific index
+            function moveToIndex(index) {
+                currentIndex = index;
+                $inner.css('transform', `translateX(-${currentIndex * 100}%)`);
+            }
+
+            // Automatic sliding function
+            function startAutoplay() {
+                intervalId = setInterval(function() {
+                    currentIndex = (currentIndex + 1) % itemCount; // Loop back to start
+                    moveToIndex(currentIndex);
+                }, slideInterval);
+            }
+
+            // Stop autoplay
+            function stopAutoplay() {
+                clearInterval(intervalId);
+            }
+
+            // Start autoplay initially
+            startAutoplay();
+
+            // Pause on hover
+            $carousel.on('mouseenter', function() {
+                stopAutoplay();
+            }).on('mouseleave', function() {
+                startAutoplay();
+            });
+
+            // Remove existing click handlers to prevent duplicates
+            $carousel.find('.carousel-prev').off('click');
+            $carousel.find('.carousel-next').off('click');
+
+            // Next button
+            $carousel.find('.carousel-next').on('click', function() {
+                stopAutoplay(); // Stop autoplay on manual click
+                if (currentIndex < itemCount - 1) {
+                    currentIndex++;
+                    moveToIndex(currentIndex);
+                } else {
+                    currentIndex = 0; // Loop to start
+                    moveToIndex(currentIndex);
+                }
+                startAutoplay(); // Resume autoplay
+            });
+
+            // Previous button
+            $carousel.find('.carousel-prev').on('click', function() {
+                stopAutoplay(); // Stop autoplay on manual click
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    moveToIndex(currentIndex);
+                } else {
+                    currentIndex = itemCount - 1; // Loop to end
+                    moveToIndex(currentIndex);
+                }
+                startAutoplay(); // Resume autoplay
+            });
+        });
+    }
+
+    // Run on page load
+    $(document).ready(function() {
+        initializeCarousels();
+    });
+
+    // AJAX search function
+    function searchPDT() {
+        var skinid = document.getElementById("selskintype").value;
+        var concernid = document.getElementById("concern").value;
+        var ur = "{% url 'User:ajaxsearchproduct' %}";
+        $.ajax({
+            url: ur,
+            data: { skinid: skinid, concernid: concernid },
+            success: function(data) {
+                $("#result").html(data);
+                // Re-initialize carousels after AJAX update
+                initializeCarousels();
+            },
+            error: function(xhr, status, error) {
+                console.error('AJAX error:', error);
+            }
+        });
+    }
+</script>
+

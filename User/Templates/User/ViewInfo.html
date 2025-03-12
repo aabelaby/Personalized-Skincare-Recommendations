@@ -1,0 +1,141 @@
+{% extends 'User/Head.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Information</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', Arial, sans-serif;
+        }
+
+        body {
+            background: #f4e1c1;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .qa-container {
+            width: 90%;
+            max-width: 600px;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            color: #966d51;
+            margin-bottom: 20px;
+        }
+
+        .question {
+            font-size: 18px;
+            font-weight: 600;
+            color: #7a4d39;
+            padding: 10px;
+            background: #f9f3eb;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+
+        .question:hover {
+            background: #e0c3a0;
+        }
+
+        .answer {
+            font-size: 16px;
+            color: #333;
+            padding: 10px;
+            background: #fff;
+            border-radius: 8px;
+            margin-top: 10px;
+            display: block;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .nav-buttons button {
+            background: #966d51;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .nav-buttons button:hover {
+            background: #7a4d39;
+        }
+        .cont{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cont">
+        <div class="qa-container">
+            <h2>Question & Answer Section</h2>
+            {% for i in inf %}
+            <div class="qa-item" style="display: none;">
+                <div class="question">{{ i.id }}. {{ i.question }}</div>
+                <div class="answer">{{ i.answer }}</div>
+            </div>
+            {% endfor %}
+            <div class="nav-buttons">
+                <button onclick="prevQuestion()">&#9665; Prev</button>
+                <button onclick="nextQuestion()">Next &#9655;</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentIndex = 0;
+        let questions = document.querySelectorAll(".qa-item");
+
+        function showQuestion(index) {
+            questions.forEach((q, i) => {
+                if (i === index) {
+                    q.style.display = "block";
+                    q.querySelector(".answer").style.display = "block";
+                } else {
+                    q.style.display = "none";
+                }
+            });
+        }
+
+        function nextQuestion() {
+            if (currentIndex < questions.length - 1) {
+                currentIndex++;
+                showQuestion(currentIndex);
+            }
+        }
+
+        function prevQuestion() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                showQuestion(currentIndex);
+            }
+        }
+
+        showQuestion(currentIndex);
+    </script>
+</body>
+
+</html>
+{% endblock content %}

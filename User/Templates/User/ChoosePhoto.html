@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Photo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', Arial, sans-serif;
+        }
+        body {
+            background: #f4e1c1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .form-container {
+            width: 90%;
+            max-width: 400px;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h2 {
+            color: #7a4d39;
+            margin-bottom: 20px;
+        }
+        .file-input {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            background: #e0c3a0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .file-input:hover {
+            background: #d1a77f;
+        }
+        input[type="file"] {
+            display: none;
+        }
+        label {
+            font-size: 16px;
+            font-weight: bold;
+            color: #7a4d39;
+            cursor: pointer;
+        }
+        input[type="submit"] {
+            background: #7a4d39;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+            margin-top: 15px;
+            width: 100%;
+        }
+        input[type="submit"]:hover {
+            background: #5a3223;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Choose a Photo</h2>
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label class="file-input">
+                <input type="file" name="photo" id="photo" required>
+                Click to Upload a Photo
+            </label>
+            <br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    {% if msg %}
+    <script>
+        alert('{{msg}}');
+        window.location = "{% url 'User:MyProfile' %}";
+    </script>
+    {% endif %}
+</body>
+</html>

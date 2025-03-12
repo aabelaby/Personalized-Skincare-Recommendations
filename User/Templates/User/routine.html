@@ -1,0 +1,166 @@
+{% extends 'User/Head.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skincare Routine Builder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F4DFC8; /* Beige Background */
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            width: 50%;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0px 0px 10px gray;
+            border-radius: 10px;
+        }
+        h2 {
+            color: #5D4037; /* Brown Header */
+            text-decoration: underline;
+        }
+        .toggle-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+        }
+        .toggle-switch {
+            position: relative;
+            width: 80px;
+            height: 35px;
+            background: #6EC6FF;
+            border-radius: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 5px;
+            transition: background 0.3s ease;
+        }
+        .toggle-switch span {
+            font-weight: bold;
+            color: white;
+        }
+        .toggle-circle {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: #FDD835;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+        .night-mode {
+            background: #37474F;
+        }
+        .night-mode .toggle-circle {
+            transform: translateX(45px);
+        }
+        .routine {
+            display: none;
+            text-align: left;
+            padding: 15px;
+            background: #EADBC8; /* Light Beige for Boxes */
+            border-radius: 8px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        .routine.active {
+            display: block;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            font-size: 18px;
+            margin: 8px 0;
+            padding: 8px;
+        }
+        .info-card {
+            margin-top: 20px;
+            padding: 15px;
+            background: #FFF3E0; /* Light Orange */
+            color: #5D4037;
+            font-size: 16px;
+            border-left: 5px solid #F57C00; /* Orange Accent */
+            text-align: left;
+            border-radius: 8px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Skincare Routine Builder</h2>
+
+        <!-- Toggle Switch -->
+        <div class="toggle-container">
+            <span id="amLabel">AM</span>
+            <div class="toggle-switch" id="toggleSwitch">
+                <div class="toggle-circle"></div>
+            </div>
+            <span id="pmLabel">PM</span>
+        </div>
+
+        <!-- Morning Routine -->
+        <div id="morningRoutine" class="routine active">
+            <h3>Morning Routine</h3>
+            <ul>
+                <li>Cleanse</li>
+                <li>Tone (Optional)</li>
+                <li>Treat (Serums/Acids)</li>
+                <li>Moisturize</li>
+                <li>Sunscreen</li>
+            </ul>
+        </div>
+
+        <!-- Night Routine -->
+        <div id="nightRoutine" class="routine">
+            <h3>Night Routine</h3>
+            <ul>
+                <li>Cleanse</li>
+                <li>Tone (Optional)</li>
+                <li>Treat (Serum/Acid)</li>
+                <li>Moisturize</li>
+                <li>Exfoliate (Weekly, Optional)</li>
+                <li>Mask (Weekly, Optional)</li>
+            </ul>
+        </div>
+
+        <!-- Optional Steps Info Card -->
+        <div class="info-card">
+            <strong>Note:</strong> Toning, Exfoliating, and Masking are optional steps.  
+            Use them based on your skin type & needs for best results.
+        </div>
+    </div>
+
+    <script>
+        const toggleSwitch = document.getElementById("toggleSwitch");
+        const morningRoutine = document.getElementById("morningRoutine");
+        const nightRoutine = document.getElementById("nightRoutine");
+
+        toggleSwitch.addEventListener("click", () => {
+            toggleSwitch.classList.toggle("night-mode");
+
+            if (toggleSwitch.classList.contains("night-mode")) {
+                morningRoutine.classList.remove("active");
+                nightRoutine.classList.add("active");
+            } else {
+                nightRoutine.classList.remove("active");
+                morningRoutine.classList.add("active");
+            }
+        });
+    </script>
+
+</body>
+</html>
+
+{% endblock content %}

@@ -1,0 +1,44 @@
+{% extends 'Admin/Head.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery</title>
+</head>
+<body>
+        <div class="bg-light rounded h-100 p-4">
+        <h1 align="center">Gallery</h1>
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <table class="table">
+                <tr>
+                    <td><label for="photo">Product Photo:</label></td>
+                    <td><input type="file" id="photo" name="photo" required class="form-control"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center"><input type="submit" value="Submit" class="btn btn-primary m-2"></td>
+                </tr>
+            </table>
+        </form>
+        </div>
+
+        <table class="table table-striped">
+            <tr>
+                <th>SL NO</th>
+                <th>Image</th>
+                <th>Action</th>
+            </tr>
+            {% for i in img %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td><img src="{{ i.gallery_image.url }}" width="150" height="150" alt="Gallery Image"></td>
+                <td><a href="{% url 'Admin:delproductphoto' i.id %}">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>
+{% endblock content %}

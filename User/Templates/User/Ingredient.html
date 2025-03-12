@@ -1,0 +1,258 @@
+{% extends 'User/Head.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skincare Ingredient Checker - Glow Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', Arial, sans-serif;
+        }
+
+        body {
+            background: #f5e8c7; /* Beige background */
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            color: #8b5e3c; /* Brown for heading */
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .checker-container {
+            background: #ffffff; /* White card background */
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .checker-title {
+            font-size: 22px;
+            color: #8b5e3c; /* Brown for title */
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .checker-section {
+            margin-bottom: 20px;
+        }
+
+        .checker-section label {
+            display: block;
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .checker-section input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .checker-button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: #8b5e3c; /* Brown button color */
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            text-align: center;
+        }
+
+        .checker-button:hover {
+            background: #704a2c; /* Darker brown on hover */
+        }
+
+        .checker-result {
+            text-align: center;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .checker-result h3 {
+            font-size: 20px;
+            color: #8b5e3c; /* Brown for result heading */
+            margin-bottom: 10px;
+        }
+
+        .checker-result p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .alert {
+            color: #d32f2f; /* Red for warnings */
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        /* Back to Home Button */
+        .home-button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: #8b5e3c; /* Brown button color */
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .home-button:hover {
+            background: #704a2c; /* Darker brown on hover */
+        }
+
+        @media (max-width: 600px) {
+            .checker-container {
+                padding: 20px;
+            }
+
+            .checker-title {
+                font-size: 18px;
+            }
+
+            .checker-section label {
+                font-size: 14px;
+            }
+
+            .checker-section input[type="text"] {
+                font-size: 12px;
+            }
+
+            .checker-button {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            .checker-result h3 {
+                font-size: 16px;
+            }
+
+            .checker-result p {
+                font-size: 12px;
+            }
+
+            .home-button {
+                font-size: 14px;
+                padding: 10px;
+            }
+        }
+        .cont{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <h1>Glow Guide</h1>
+        <p>Is Your Skincare Safe?</p>
+    </div>
+
+    <div class="cont">
+        <!-- Ingredient Checker Container -->
+    <div class="checker-container">
+        <h2 class="checker-title">Skincare Ingredient Checker</h2>
+
+        <form id="ingredientChecker" onsubmit="checkIngredient(event)">
+            <!-- Ingredient Input -->
+            <div class="checker-section">
+                <label for="ingredient">Enter an ingredient you want to check (e.g., Parabens, Fragrance):</label>
+                <input type="text" id="ingredient" name="ingredient" placeholder="e.g., Parabens" required>
+            </div>
+
+            <!-- Check Button -->
+            <button type="submit" class="checker-button">Is It Harmful?</button>
+        </form>
+
+        <!-- Result Section -->
+        <div id="checkerResult" class="checker-result">
+            <h3>Your Ingredient Check Result:</h3>
+            <p id="resultText"></p>
+            <p id="alert" class="alert"></p>
+
+            <!-- Back to Home Button -->
+            <button class="home-button" onclick="goBack()">Back to Home</button>
+        </div>
+    </div>
+    </div>
+
+    <script>
+        // Hardcoded list of harmful ingredients (based on commonly recognized concerns)
+        const harmfulIngredients = [
+            "formaldehyde", "paraformaldehyde", "methylene glycol", "quaternium 15", "mercury",
+            "dibutyl phthalate", "diethylhexyl phthalate", "parabens", "isobutyl paraben",
+            "isopropyl paraben", "pfas", "toluene", "sodium lauryl sulfate", "sls",
+            "sodium laureth sulfate", "sles", "alcohol", "fragrance", "phthalates",
+            "mineral oil", "petrolatum", "bha", "bht", "triclosan", "hydroquinone",
+            "retinol", "retinoic acid", "retinyl palmitate"
+        ];
+
+        function checkIngredient(event) {
+    event.preventDefault();
+
+    // Get user input
+    const ingredientInput = document.getElementById("ingredient").value.trim().toLowerCase();
+
+    // Display result section
+    const resultText = document.getElementById("resultText");
+    const alertMsg = document.getElementById("alert");
+
+    // Check if the ingredient is harmful
+    if (harmfulIngredients.includes(ingredientInput)) {
+        resultText.textContent = `${ingredientInput} is considered harmful and may cause skin irritation, hormonal disruption, or other health concerns.`;
+        alertMsg.textContent = `It’s best to avoid products with ${ingredientInput} to keep your skin safe!`;
+    } else {
+        resultText.textContent = `${ingredientInput} is not recognized as harmful based on common skincare safety concerns. It may be safe to use, but consult a dermatologist if unsure!`;
+        alertMsg.textContent = "";
+    }
+
+    // Show result section
+    document.getElementById("checkerResult").style.display = "block";
+    document.getElementById("ingredientChecker").style.display = "none";
+}
+
+function goBack() {
+    window.location.href = "/home"; // Replace with the actual home page URL
+}
+
+    </script>
+</body>
+</html>
+{% endblock content %}

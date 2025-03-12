@@ -1,0 +1,91 @@
+{% extends 'Admin/Head.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Product</title>
+</head>
+
+<body>
+  <div class="container">
+    <!-- <div class="col-sm-12 col-xl-6"> -->
+    <div class="bg-light rounded h-100 p-4">
+      <h1 align="center">Product Entry</h1>
+      <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table class="table">
+          <tr>
+            <td><label for="name">Name:</label></td>
+            <td><input type="text" id="name" name="name" value="{{type.product_name}}" required class="form-control">
+            </td>
+          </tr>
+          <tr>
+            <td><label for="details">Details:</label></td>
+            <td><input type="text" id="details" name="details" value="{{type.product_details}}" required
+                class="form-control"></td>
+          </tr>
+          <tr>
+            <td>Concern</td>
+            <td>
+              <select name="sel_concern" id="sel_concern" class="form-select">
+                <option value="">--Select--</option>
+                {% for i in concern %}
+                <option value="{{i.id}}">{{i.concern_name}}</option>
+                {% endfor %}
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td><label for="price">Price:</label></td>
+            <td><input type="text" id="price" name="price" value="{{type.product_price}}" required class="form-control"
+                pattern="[0-9]{3,4}"></td>
+          </tr>
+          <tr>
+            <td><label for="amazonLink">Amazon Link:</label></td>
+            <td><input type="text" id="amazonLink" name="amazonLink" value="{{type.product_amzonlink}}" required
+                class="form-control"></td>
+          </tr>
+          <tr>
+            <td><label for="flipkartLink">Flipkart Link:</label></td>
+            <td><input type="text" id="flipkartLink" name="flipkartLink" value="{{type.product_flpctlink}}" required
+                class="form-control"></td>
+          </tr>
+          <tr>
+            <td colspan="2" align="center"><input type="submit" value="Submit" class="btn btn-primary m-2"></td>
+          </tr>
+        </table>
+    </div>
+  </div>
+  </form>
+    <br>
+  <h2 align="center">Product List</h2>
+  <table class="table table-striped">
+    <tr>
+      <th>SL NO</th>
+      <th>Name</th>
+      <th>Details</th>
+      <th>Price</th>
+      <th align="center">Action</th>
+    </tr>
+    {% for i in pro %}
+    <tr>
+      <td>{{forloop.counter}}</td>
+      <td>{{i.product_name}}</td>
+      <td>{{i.product_details}}</td>
+      <td>{{i.product_price}}</td>
+      <td>
+        <a href="{% url 'Admin:gallery' i.id %}">Add Photo</a> |
+        <a href="{% url 'Admin:ProductSkintype' i.id %}">Add SkinType</a> |
+        <a href="{% url 'Admin:SkinProduct' i.id %}">Add SkinProduct</a> |
+        <a href="{% url 'Admin:deleteproduct' i.id %}">Delete</a> |
+        <a href="{% url 'Admin:editproduct' i.id %}">Edit</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+  </div>
+</body>
+
+</html>
+{% endblock content %}

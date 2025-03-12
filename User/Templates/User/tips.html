@@ -1,0 +1,213 @@
+{% extends 'User/Head.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tips for Skincare</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: #f4e1c1;
+            color: #333;
+            padding: 40px;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: #966d51;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #7a4d39;
+            margin-bottom: 10px;
+        }
+
+        h5 {
+            color: #8b5a2b;
+            margin: 15px 0;
+        }
+
+        .section {
+            margin: 25px 0;
+            padding: 20px;
+            background-color: #f9f3eb;
+            border-radius: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .section:hover {
+            background-color: #e0c3a0;
+        }
+
+        .section h5 {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .content {
+            display: none;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 8px;
+        }
+
+        .content p {
+            margin: 10px 0;
+        }
+
+        button {
+            background-color: #966d51;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #7a4d39;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h5>Tips for Skincare</h5>
+        <h5>Your Comprehensive Guide to Healthy Skin</h5>
+
+        <!-- General Skin Care -->
+        <div class="section">
+            <h5 onclick="toggleContent('general-skincare')">General Skin Care</h5>
+            <div class="content" id="general-skincare">
+                <p>• Wash your face twice daily with a gentle cleanser.</p>
+                <p>• Apply broad-spectrum sunscreen (SPF 30+) every day.</p>
+                <p>• Moisturize your skin daily, even if it's oily.</p>
+                <p>• Remove makeup before bed.</p>
+                <p>• Avoid touching your face.</p>
+                <p>• Clean makeup brushes regularly.</p>
+                <p>• Patch test new skincare products.</p>
+            </div>
+        </div>
+
+        <!-- Exfoliation -->
+        <div class="section">
+            <h5 onclick="toggleContent('exfoliation')">Exfoliation</h5>
+            <div class="content" id="exfoliation">
+                <p>• Exfoliate 1-3 times per week, depending on skin type.</p>
+                <p>• Choose gentle physical or chemical exfoliants.</p>
+                <p>• Avoid over-exfoliating, which can irritate skin.</p>
+            </div>
+        </div>
+
+        <!-- Diet and Hydration -->
+        <div class="section">
+            <h5 onclick="toggleContent('diet-hydration')">Diet and Hydration</h5>
+            <div class="content" id="diet-hydration">
+                <p>• Drink plenty of water throughout the day.</p>
+                <p>• Eat a balanced diet rich in fruits and vegetables.</p>
+                <p>• Limit processed foods, sugary drinks, and excessive dairy.</p>
+                <p>• Incorporate omega-3 fatty acids into your diet.</p>
+            </div>
+        </div>
+
+        <!-- Lifestyle -->
+        <div class="section">
+            <h5 onclick="toggleContent('lifestyle')">Lifestyle</h5>
+            <div class="content" id="lifestyle">
+                <p>• Get 7-9 hours of quality sleep each night.</p>
+                <p>• Manage stress through exercise, yoga, or meditation.</p>
+                <p>• Avoid smoking.</p>
+            </div>
+        </div>
+
+        <!-- Targeted Concerns -->
+        <div class="section">
+            <h5 onclick="toggleContent('targeted-concerns')">Targeted Concerns</h5>
+            <div class="content" id="targeted-concerns">
+                <p>• For acne, use products with salicylic acid or benzoyl peroxide.</p>
+                <p>• For dark spots, use products with vitamin C or niacinamide.</p>
+                <p>• For anti-aging, use products with retinoids.</p>
+                <p>• Do not pick at blemishes.</p>
+            </div>
+        </div>
+
+        <!-- General Tips -->
+        <div class="section">
+            <h5 onclick="toggleContent('general-tips')">General Tips</h5>
+            <div class="content" id="general-tips">
+                <p>• Use a very soft towel, and pat your face dry, don't rub.</p>
+                <p>• Hot showers can strip your skin of its natural oils. Opt for lukewarm water instead.</p>
+                <p>• Your phone touches your face frequently and can harbor bacteria. Clean your phone screen regularly with antibacterial wipes.</p>
+                <p>• If you live in a city with poor air quality, cleanse your skin thoroughly at night to remove pollutants.</p>
+                <p>• Learn to read skincare product labels. Avoid products with harsh chemicals, fragrances, and dyes, especially if you have sensitive skin.</p>
+                <p>• Don't forget your lips! Exfoliate them gently with a sugar scrub and apply a moisturizing lip balm with SPF.</p>
+                <p>• Avoid licking your lips.</p>
+                <p>• Gently apply eye cream with your ring finger to avoid pulling on the delicate skin around your eyes.</p>
+            </div>
+        </div>
+
+        <!-- Additional Tips -->
+        <div class="section">
+            <h5 onclick="toggleContent('additional-tips')">Additional Tips</h5>
+            <div class="content" id="additional-tips">
+                <p>• Change pillowcases regularly.</p>
+                <p>• Use a clean towel to dry your face.</p>
+                <p>• Consult a dermatologist for persistent skin problems.</p>
+                <p>• Be consistent with your skin care routine.</p>
+                <p>• Protect your skin from excessive hot water.</p>
+            </div>
+        </div>
+
+        <button onclick="scrollToTop()">Back to Top</button>
+    </div>
+
+    <script>
+        // Toggle content visibility on click
+        function toggleContent(id) {
+            var content = document.getElementById(id);
+            content.style.display = (content.style.display === 'block') ? 'none' : 'block';
+        }
+
+        // Scroll to top function
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+
+</html>
+{% endblock content %}

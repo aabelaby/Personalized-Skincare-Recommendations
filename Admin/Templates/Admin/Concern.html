@@ -1,0 +1,57 @@
+{% extends 'Admin/Head.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Skin Concerns</title>
+</head>
+<body>
+    <div class="container">
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="bg-light rounded h-100 p-4">
+            <h3 align="center">Skin Concern</h3>
+            <table class="table">
+                <tr>
+                    <td>Skin Concern:</td>
+                    <td><input type="text" id="skin-concerns" name="concern" placeholder="Type your concern here"
+                        value="{{type.concern_name}}" required class="form-control"></td>
+                </tr>
+                <tr>
+                    <td>Details:</td>
+                    <td><textarea name="txt_details" id="txt_details" class="form-control"></textarea></td>
+                </tr>
+                <tr>
+                    <td>Photo:</td>
+                    <td><input type="file" name="selconvern" id="selconvern" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center"><button type="submit" class="btn btn-primary m-2">Submit</button></td>
+                </tr>
+            </table>
+    </div>
+    <br>
+    <table class="table table-striped">
+        <tr>
+            <th>SL NO</th>
+            <th>Photo</th>
+            <th>Concern</th>
+            <th>Details</th>
+            <th>Action</th>
+        </tr>
+        {% for i in con %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td><img src="{{ i.concern_photo.url }}" width="200" height="150" alt=""></td>
+            <td>{{ i.concern_name }}</td>
+            <td>{{ i.concern_details }}</td>
+            <td>
+                <a href="{% url 'Admin:deleteconcern' i.id %}">Delete</a> |
+                <a href="{% url 'Admin:editconcern' i.id %}">Edit</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
+{% endblock content %}

@@ -1,0 +1,56 @@
+{% extends 'Admin/Head.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Skin Product</title>
+</head>
+
+<body>
+  <div class="bg-light rounded h-100 p-4">
+  <form action="" method="post">
+    {% csrf_token %}
+    <h3 align="center">Skinproduct</h3>
+    <table border="1" class="table">
+      <tr>
+        <td>Skin Type:</td>
+        <td>
+          <select id="skinType" name="skinType" required class="form-control">
+            <option value="">Select Skin Type</option>
+            {% for i in skintype %}
+            <option {% if edit.product_skintype_id == i.id %} selected {% endif %} value="{{i.id}}">{{i.skin_type}}
+            </option>
+            {% endfor %}
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" style="text-align: center;">
+          <input type="submit" value="Submit" class="btn btn-primary m-2">
+        </td>
+      </tr>
+    </table>
+  </form>
+  </div>
+  <br>
+  <table border="1" class="table table-striped">
+    <tr>
+      <td>SL NO</td>
+      <td>Skintype</td>
+      <td>Action</td>
+    </tr>
+    {%for i in sknpro%}
+    <tr>
+      <td>{{forloop.counter}}</td>
+      <td>{{i.skinproduct_type.skin_type}}</td>
+      <td><a href="{% url 'Admin:deleteskinproduct' i.id pid %}">Delete </a>
+        <a href="{% url 'Admin:editskinproduct' i.id pid %}">Edit </a>
+      </td>
+    </tr>
+    {%endfor%}
+  </table>
+</body>
+
+</html>
+{% endblock content %}
