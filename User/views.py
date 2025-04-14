@@ -192,3 +192,9 @@ def Ingredient(request):
         return render(request, 'User/Ingredient.html')
     else:
         return redirect("Guest:Login")
+    
+def Findskin(request):
+    if "userid" in request.session:
+        return render(request, 'User/Findskin.html')
+    else:
+        return redirect("Guest:Login")

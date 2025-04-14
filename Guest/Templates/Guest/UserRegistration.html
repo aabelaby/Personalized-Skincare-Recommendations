@@ -110,9 +110,7 @@
                 </tr>
                 <tr>
                     <td><label for="password">Password:</label></td>
-                    <td><input type="password" id="password" name="password" 
-                        pattern="(?=.\d)(?=.[a-z])(?=.*[A-Z]).{8,}" 
-                        title="Must contain at least one number, one uppercase and lowercase letter, and at least 8 characters" required></td>
+                    <td><input type="password" id="password" name="password"  required></td>
                 </tr>
                 <tr>
                     <td colspan="2" class="button-container">
@@ -127,7 +125,7 @@
     {% if msg %}
     <script>
         alert('{{ msg }}');
-        window.location = "{% url 'Guest:UserRegistration' %}";
+        window.location = "{% url 'User:HomePage' %}";
     </script>
     {% endif %}
 </body>

@@ -15,10 +15,15 @@
         }
 
         body {
-            background-color: #d6bab1;
+            /* background-color: #d6bab1; */
             /* display: flex; */
             justify-content: center;
             padding: 20px;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("{% static 'Main/images/homeimage.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
         }
 
         .card-container {
@@ -314,6 +319,70 @@
     background-color: #8c5e3c; 
     transform: scale(1.05); 
 }
+
+/* Common Styles for Selection Boxes */
+.selection-box {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 20px auto;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Hover Effect */
+.selection-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Labels */
+.selection-box label {
+    display: block;
+    font-size: 16px;
+    color: #5d4037; /* Soft brown */
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Dropdowns */
+.selection-box select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #d1a982; /* Light brown */
+    font-size: 14px;
+    background: #f9f5f0;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Hover & Focus Effects */
+.selection-box select:hover,
+.selection-box select:focus {
+    border-color: #8b5e3c; /* Darker brown */
+    background: #fff;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .selection-box {
+        padding: 15px;
+    }
+
+    .selection-box label {
+        font-size: 14px;
+    }
+
+    .selection-box select {
+        font-size: 13px;
+        padding: 10px;
+    }
+}
+
     </style>
 </head>
 
@@ -323,20 +392,14 @@
     </div>
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <div class="tablecon">
-            <table border="1" align="center" class="tablecon">
-                <tr>
-                    <td>Enter your Skin Type</td>
-                    <td>
-                        <select name="skintype" required id="selskintype" onchange="searchPDT()">
-                            <option value="">--Select your skin type--</option>
-                            {% for i in skintype %}
-                            <option value="{{i.id}}">{{i.skin_type}}</option>
-                            {% endfor %}
-                        </select>
-                    </td>
-                </tr>
-            </table>
+        <div class="selection-box">
+            <label for="selskintype">Enter your Skin Type</label>
+            <select name="skintype" required id="selskintype" onchange="searchPDT()">
+                <option value="">--Select your skin type--</option>
+                {% for i in skintype %}
+                <option value="{{i.id}}">{{i.skin_type}}</option>
+                {% endfor %}
+            </select>
         </div>
         <div class="imgcontent">
             <img src="{% static 'Images/skintype.jpg' %}" width="380" height="380" alt="">
@@ -358,21 +421,21 @@
             </ol>
             <p><strong>Note</strong>: Skin type can change due to factors like weather, hormones, or product use. This method is a starting point and may not fully capture your skin’s needs. Proceed at your own discretion. Ready to explore your skincare options?</p>
         </div>
+        
         </div>
-        <div class="tablecon">
-            <table border="1" align="center">
-                <tr>
-                    <td>Select your Skin Concern</td>
-                    <td>
-                        <select name="concern" id="concern" required onchange="searchPDT()">
-                            <option value="">--Select your skin concern--</option>
-                            {% for i in skinconcern %}
-                            <option value="{{i.id}}">{{i.concern_name}}</option>
-                            {% endfor %}
-                        </select>
-                    </td>
-                </tr>
-            </table>
+        <!-- <div>
+            <a>Are you still confused with your skin type..??</a>
+            <a>Then click on the link below !</a>
+            <a href="{% url 'User:Findskin' %}">Find Skintype</a>
+        </div> -->
+        <div class="selection-box">
+            <label for="concern">Select your Skin Concern</label>
+            <select name="concern" id="concern" required onchange="searchPDT()">
+                <option value="">--Select your skin concern--</option>
+                {% for i in skinconcern %}
+                <option value="{{i.id}}">{{i.concern_name}}</option>
+                {% endfor %}
+            </select>
         </div>
 
         <div class="concerncard">

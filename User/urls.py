@@ -21,7 +21,7 @@ urlpatterns = [
    path('tips/',views.tips, name="tips"),
    path('Ingredient/',views.Ingredient, name="Ingredient"),
    path('ajaxsearchproduct/',views.ajaxsearchproduct, name="ajaxsearchproduct"),
-
+   path('Findskin/',views.Findskin, name="Findskin"),
    path('logout/',views.logout, name="logout"),
 
 

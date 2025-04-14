@@ -2,45 +2,145 @@
 <html lang="en">
 <head>
     <title>User Complaint</title>
+    <style>
+        body {
+            background-color: #f4e1c1;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 10px;
+            color: #5c4033;
+        }
+
+        form, table {
+            background-color: #ffffff;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            width: 90%;
+            max-width: 600px;
+            border: none;
+        }
+
+        form table, table[border="1"] {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        table[border="1"] th, table[border="1"] td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+
+        td label {
+            font-weight: 600;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            background-color: #fff7f0;
+        }
+
+        button[type="submit"] {
+            background-color: #a56b47;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .home-container {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        padding: 10px;
+        }
+
+        .home-button {
+        background-color: #a47856; 
+        color: white;
+        font-weight: bold;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px; 
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); 
+        display: inline-block;
+        text-decoration: none;
+        }
+
+        .home-button:hover {
+        background-color: #8c5e3c; 
+        transform: scale(1.05); 
+        }
+
+        button[type="submit"]:hover {
+            background-color: #8c5b3d;
+        }
+
+        h2 {
+            text-align: center;
+            color: #5c4033;
+            margin-bottom: 15px;
+        }
+
+        table[border="1"] tr:first-child {
+            background-color: #fdf1e6;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
+    <div class="home-container">
+        <a href="{% url 'User:HomePage' %}" class="home-button">Back to Home</a>
+    </div>
 
-   
+    <h2>User Complaint Form</h2>
+
     <form action="" method="post">
         {% csrf_token %}
-        <table border="1" >
+        <table>
             <tr>
                 <td><label>Title:</label></td>
-                <td><input type="text" name="title" required value="{{type.title}}"></td>
+                <td><input type="text" name="title"  required value="{{type.title}}"></td>
             </tr>
             <tr>
                 <td><label>Content:</label></td>
-                <td><textarea name="content" rows="4" cols="30" required value="{{type.content}}"></textarea></td>
+                <td><textarea name="content" rows="4" cols="30" required>{{type.content}}</textarea></td>
             </tr>
             <tr>
                 <td colspan="2" align="center">
-                    <button type="submit"  >Submit</button>
+                    <button type="submit">Submit</button>
                 </td>
             </tr>
         </table>
     </form>
-    <br>
-    <table border="1">
+
+    <!-- <table border="1">
         <tr>
-            <td>SL NO</td>
-            <td>Title</td>
-            <td>Content</td>
-            <td>Reply</td>
+            <th>SL NO</th>
+            <th>Title</th>
+            <th>Content</th>
+            <th>Reply</th>
         </tr>
-        {%for i in comp%}
+        {% for i in comp %}
         <tr>
             <td>{{i.id}}</td>
             <td>{{i.title}}</td>
             <td>{{i.content}}</td>
             <td>{{i.reply}}</td>
         </tr>
-        {%endfor%}
-    </table>
+        {% endfor %}
+    </table> -->
 
 </body>
 </html>

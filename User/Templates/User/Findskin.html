@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skincare Quiz - Glow Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', Arial, sans-serif;
+        }
+
+        body {
+            background: #f5e8c7;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            color: #8b5e3c;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .quiz-container {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .quiz-title {
+            font-size: 22px;
+            color: #8b5e3c;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .quiz-question {
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .quiz-options {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .quiz-options label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #555;
+            cursor: pointer;
+        }
+
+        .quiz-options input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .quiz-button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: #8b5e3c;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .quiz-button:hover {
+            background: #704a2c;
+        }
+
+        .quiz-result {
+            text-align: center;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .quiz-result h3 {
+            font-size: 20px;
+            color: #8b5e3c;
+            margin-bottom: 10px;
+        }
+
+        .quiz-result p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .next-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #8b5e3c;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: background 0.3s ease;
+        }
+
+        .next-link:hover {
+            background: #704a2c;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Glow Guide</h1>
+        <p>Discover Your Perfect Skincare Routine!</p>
+    </div>
+
+    <div class="quiz-container">
+        <h2 class="quiz-title">Find Your Skin Type</h2>
+
+        <form id="skincareQuiz">
+            <div class="quiz-question">
+                1. Does your skin feel tight or dry after washing?
+                <div class="quiz-options">
+                    <label><input type="radio" name="q1" value="yes"> Yes</label>
+                    <label><input type="radio" name="q1" value="no"> No</label>
+                </div>
+            </div>
+
+            <div class="quiz-question">
+                2. Does your skin become oily within a few hours of washing?
+                <div class="quiz-options">
+                    <label><input type="radio" name="q2" value="yes"> Yes</label>
+                    <label><input type="radio" name="q2" value="no"> No</label>
+                </div>
+            </div>
+
+            <div class="quiz-question">
+                3. Are certain areas dry while others are oily (e.g., forehead oily, cheeks dry)?
+                <div class="quiz-options">
+                    <label><input type="radio" name="q3" value="yes"> Yes</label>
+                    <label><input type="radio" name="q3" value="no"> No</label>
+                </div>
+            </div>
+
+            <div class="quiz-question">
+                4. Do you experience frequent breakouts or acne?
+                <div class="quiz-options">
+                    <label><input type="radio" name="q4" value="yes"> Yes</label>
+                    <label><input type="radio" name="q4" value="no"> No</label>
+                </div>
+            </div>
+
+            <div class="quiz-question">
+                5. Does your skin get red or irritated easily?
+                <div class="quiz-options">
+                    <label><input type="radio" name="q5" value="yes"> Yes</label>
+                    <label><input type="radio" name="q5" value="no"> No</label>
+                </div>
+            </div>
+
+            <button type="button" class="quiz-button" onclick="submitQuiz()">Find My Skin Type!</button>
+        </form>
+
+        <div id="quizResult" class="quiz-result">
+            <h3>Your Suggested Skin Type:</h3>
+            <p id="resultText"></p>
+            <a href="/skin-type-selection" class="next-link">Proceed to Recommendations</a>
+        </div>
+    </div>
+
+    <script>
+        function submitQuiz() {
+            const answers = document.querySelectorAll('input[type="radio"]:checked');
+
+            if (answers.length < 5) {
+                alert("Please answer all questions before submitting.");
+                return;
+            }
+
+            let dryScore = 0, oilyScore = 0, combinationScore = 0;
+
+            if (answers[0].value === "yes") dryScore += 2;
+            if (answers[1].value === "yes") oilyScore += 2;
+            if (answers[2].value === "yes") combinationScore += 3;
+            if (answers[3].value === "yes") oilyScore += 2;
+            if (answers[4].value === "yes") dryScore += 1;
+
+            let skinType = "";
+            if (dryScore >= oilyScore && dryScore >= combinationScore) {
+                skinType = "Dry Skin";
+            } else if (oilyScore > dryScore && oilyScore >= combinationScore) {
+                skinType = "Oily Skin";
+            } else {
+                skinType = "Combination Skin";
+            }
+
+            document.getElementById("resultText").textContent = 
+                `You likely have ${skinType}. Let's find the best products for you!`;
+
+            document.getElementById("quizResult").style.display = "block";
+            document.getElementById("skincareQuiz").style.display = "none";
+        }
+    </script>
+
+</body>
+</html>
